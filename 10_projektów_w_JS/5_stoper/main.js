@@ -25,7 +25,7 @@ clearInterval(countTime)
 			stopwatch.textContent = `${minutes}:${seconds}`
 		} else if (seconds = 60) {
             minutes++
-			seconds = 00
+			seconds = 0
 			stopwatch.textContent = `${minutes}:0${seconds}`
 		}
 		seconds++
