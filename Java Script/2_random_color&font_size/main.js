@@ -1,31 +1,37 @@
-const btnSizeUp = document.querySelector('.sizeUp')
-const btnSizeDown = document.querySelector('.sizeDown')
-const btnColor = document.querySelector('.color')
-const text = document.querySelector('p')
+const sizeUp = document.querySelector('.sizeUp')
+const sizeDown = document.querySelector('.sizeDown')
+const color = document.querySelector('.color')
+const p = document.querySelector('p')
 
-let fontSize = 36
+let fz = 36
 
-const sizeUp = () => {
-	if (fontSize < 55) {
-		fontSize += 5
-		text.style.fontSize = fontSize + 'px'
+const sizeUpFn = () => {
+	if (fz < 50) {
+		fz += 5
+		p.style.fontSize = fz + 'px'
+		console.log(fz)
+	} else {
+		return
 	}
 }
 
-const sizedown = () => {
-	if (fontSize > 20) {
-		fontSize -= 5
-		text.style.fontSize = fontSize + 'px'
+const SizeDownFn = () => {
+	if (fz > 16) {
+		fz -= 5
+		p.style.fontSize = fz + 'px'
+		console.log(fz)
 	}
 }
 
-const ChangeColor = () => {
+const changeColor = () => {
 	const r = Math.floor(Math.random()*255)
 	const g = Math.floor(Math.random()*255)
 	const b = Math.floor(Math.random()*255)
-	text.style.color = `rgb(${r},${g},${b})`
+	
+	p.style.color = `rgb(${r}, ${g}, ${b})`
 }
 
-btnSizeUp.addEventListener('click', sizeUp)
-btnSizeDown.addEventListener('click', sizedown)
-btnColor.addEventListener('click', ChangeColor)
+
+sizeUp.addEventListener('click', sizeUpFn)
+sizeDown.addEventListener('click', SizeDownFn)
+color.addEventListener('click', changeColor)

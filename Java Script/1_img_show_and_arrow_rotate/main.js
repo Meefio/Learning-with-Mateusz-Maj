@@ -4,11 +4,12 @@ const img = document.querySelector('.item1')
 
 const showImg = () => {
 	img.classList.toggle('hide')
-	if (img.classList.contains('hide')) {
-		arrowIcon.style.transform = 'rotate(-180deg)'
+	if(img.classList.contains('hide')){
+		arrowIcon.style.rotate = '180deg'
 	} else {
-        arrowIcon.style.transform = 'rotate(0'
-    }
+		arrowIcon.style.rotate = '0deg'
+	}
 }
-arrowBtn.addEventListener('click', showImg)
 
+
+arrowBtn.addEventListener('click', showImg)

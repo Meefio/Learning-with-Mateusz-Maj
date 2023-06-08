@@ -41,3 +41,22 @@ button:hover {
     color: #00ffae;
     box-shadow: 3px 3px 10px #00ffae;
 }
+.item {
+    width: 100%;
+}
+
+.item1 {
+    background-image: url('https://tor-lodz.pl/frontend/images/supercars/porsche-911-tor-lodz-3_152bee2ebcb640b15ed56bd0097818e4d8a691ce.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.item2 {
+    background-image: url('https://tor-lodz.pl/frontend/images/supercars/porsche-911-tor-lodz-3_152bee2ebcb640b15ed56bd0097818e4d8a691ce.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.hide {
+    height: 300px;
+}
