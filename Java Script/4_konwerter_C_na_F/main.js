@@ -5,8 +5,6 @@ const resetBtn = document.querySelector('.reset')
 const changeBtn = document.querySelector('.change')
 const one = document.querySelector('.one')
 const two = document.querySelector('.two')
-let fahrenheit
-let celsius
 
 const CelcToFahr = () => {
 	fahrenheit = converter.value * 1.8 + 32
@@ -22,17 +20,18 @@ const fahrToCelc = () => {
 
 const convertFn = () => {
 	if (converter.value !== '') {
-		if (one.textContent === '°C' && converter.value !== 0) {
+		if (one.textContent === '°C') {
 			CelcToFahr()
+			
 		} else {
-			fahrToCelc(converter.value)
+			fahrToCelc()
 		}
 	} else {
-		result.textContent = 'wpisz wartość'
+		result.textContent = 'wpisz jakąś wartość'
 	}
 }
 
-const swap = () => {
+const switchFn = () => {
 	if (one.textContent === '°C') {
 		one.textContent = '°F'
 		two.textContent = '°C'
@@ -42,11 +41,15 @@ const swap = () => {
 	}
 }
 
-const reset = () => {
-	converter.value = ''
+const resetFn = () => {
 	result.textContent = ''
+	converter.value = ''
+	one.textContent = '°C'
+	two.textContent = '°F'
 }
 
-changeBtn.addEventListener('click', swap)
+console.log(two.textContent)
+
 convBtn.addEventListener('click', convertFn)
-resetBtn.addEventListener('click', reset)
+changeBtn.addEventListener('click', switchFn)
+resetBtn.addEventListener('click', resetFn)
