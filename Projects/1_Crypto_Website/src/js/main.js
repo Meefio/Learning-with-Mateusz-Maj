@@ -27,7 +27,6 @@ window.addEventListener(
 			bannerChevron.classList.remove('rotate')
 		}
 	},
-	false
 
 	// zresearchować throttling & debouncing
 )
