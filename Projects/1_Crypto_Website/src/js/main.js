@@ -3,6 +3,10 @@ const bannerText = document.querySelector('.banner__text')
 const bannerChevron = document.querySelector('.fa-chevron-down')
 const navBtn = document.querySelector('.hamburger')
 const sideMenu = document.querySelector('.side-menu')
+const paypalSmallBanner = document.querySelector('.banner-paypal__text')
+const paypalBtn = document.querySelector('.banner-paypal__btn')
+const paypalExpanded = document.querySelector('.banner-paypal__expanded')
+const paypalBtnIcon = document.querySelector('.banner-paypal__icon')
 
 const bannerShowHide = () => {
 	if (bannerBtn.classList.contains('show')) {
@@ -36,5 +40,13 @@ const burgerFn = () => {
 	sideMenu.classList.toggle('menu-show')
 }
 
+const handlePaypal = () => {
+	paypalSmallBanner.classList.toggle('paypal-show')
+	paypalExpanded.classList.toggle('paypal-show')
+	paypalBtnIcon.classList.toggle('paypal-btn-rotate')
+}
+
 navBtn.addEventListener('click', burgerFn)
 bannerBtn.addEventListener('click', bannerShowHide)
+paypalBtn.addEventListener('click', handlePaypal)
+paypalSmallBanner.addEventListener('click', handlePaypal)

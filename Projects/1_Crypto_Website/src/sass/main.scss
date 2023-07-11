@@ -64,7 +64,7 @@ body {
 }
 
 .fa-chevron-down {
-	transform: rotate(-180deg);
+	transform: rotate(180deg);
 	margin-top: -3px;
 	color: c.$gray-lighter;
 	font-size: 2rem;
@@ -206,13 +206,6 @@ body {
 .menu-show {
 	right: 0px;
 }
-@media (min-width: 600px) {
-	.banner {
-		&__btn {
-			display: none;
-		}
-	}
-}
 
 .banner-paypal {
 	background-color: c.$blue;
@@ -221,18 +214,20 @@ body {
 
 	&__expanded {
 		padding: 0 20px;
+		display: none;
+		transition: 1s;
 	}
 
 	&__text {
+		display: none;
 		font-size: 1.8rem;
 		font-weight: 600;
 		color: c.$white;
 		padding: 0.7rem 0;
+		cursor: pointer;
+		transition: 0.3s;
 	}
 	&__btn {
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
 		display: flex;
 		justify-content: center;
 		margin: 0 auto;
@@ -242,11 +237,13 @@ body {
 		overflow: hidden;
 		border-bottom-left-radius: 8px;
 		border-bottom-right-radius: 8px;
+		border: none;
+		z-index: 0;
 		cursor: pointer;
 	}
 	&__icon {
-		transform: rotate(0deg);
 		color: white;
+		transform: rotate(0);
 	}
 
 	&__img {
@@ -275,6 +272,28 @@ body {
 		font-size: 2.2rem;
 		font-weight: 600;
 		margin-bottom: 40px;
+		cursor: pointer;
+		transition: background-color 0.4s, color 0.4s;
+		&:hover {
+			background-color: #151c25;
+			color: #f4ad03;
+		}
+	}
+}
+
+.paypal-show {
+	display: block;
+}
+
+.paypal-btn-rotate {
+	transform: rotate(180deg);
+}
+
+@media (min-width: 600px) {
+	.banner {
+		&__btn {
+			display: none;
+		}
 	}
 }
 
