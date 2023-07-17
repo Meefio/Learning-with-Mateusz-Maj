@@ -7,12 +7,13 @@ const paypalSmallBanner = document.querySelector('.banner-paypal__text')
 const paypalBtn = document.querySelector('.banner-paypal__btn')
 const paypalExpanded = document.querySelector('.banner-paypal__expanded')
 const paypalBtnIcon = document.querySelector('.banner-paypal__icon')
-const stockMenu = document.querySelector('.stock__selected-li')
-const stockLiBox = document.querySelector('.stock__li-box')
+const stockSelectedLi = document.querySelector('.stock__selected-li')
+const stockNav = document.querySelector('.stock__nav')
+const stockLiItem = document.querySelectorAll('.stock__li-item')
+const stockNavArrow = document.querySelector('.stock__arrow')
 const API_URL = 'https://api.stockdata.org/v1/data/quote?symbols='
 const API_KEY = '&api_token=JGB3f6aL6tyng2f8KOGq2YK0NdtlzChkP2zkV1ve'
-let symbols = 'AAPL,TSLA,MSFT'
-const url = API_URL + symbols + API_KEY
+
 const stockPair = document.querySelectorAll('.stock__pair')
 const stockFullName = document.querySelectorAll('.stock__full-name')
 const stockPrice = document.querySelectorAll('.stock__price')
@@ -47,74 +48,120 @@ window.addEventListener(
 
 	// zresearchować throttling & debouncing
 )
-
-
-console.log(stockMenu.textContent);
-
-
 const burgerFn = () => {
 	navBtn.classList.toggle('is-active')
 	sideMenu.classList.toggle('menu-show')
 }
-
+const hideBurger = () => {
+	navBtn.classList.remove('is-active')
+	sideMenu.classList.remove('menu-show')
+}
 const handlePaypal = () => {
 	paypalSmallBanner.classList.toggle('paypal-show')
 	paypalExpanded.classList.toggle('paypal-show')
 	paypalBtnIcon.classList.toggle('paypal-btn-rotate')
 }
-const getData = () => {
-	axios.get(url).then(res => {
-		const symbolData = res.data.data;
-		let arrNumber = 0
-		stockPair.forEach(elem => {
-			elem.textContent = symbolData[arrNumber].ticker
-			arrNumber++
+const handleMenu = () => {
+	stockLiItem.forEach(el => {
+		el.classList.toggle('stock__nav-show')
+		if (el.classList.contains('stock__nav-show')) {
+			stockNavArrow.style.rotate = '180deg'
+			stockNavArrow.style.marginTop = '-14px'
+		} else {
+			stockNavArrow.style.rotate = '0deg'
+			stockNavArrow.style.marginTop = '-5px'
+		}
+	})
+}
+
+const hideMenu = () => {
+	stockLiItem.forEach(el => {
+		if (el.classList.contains('stock__nav-show')) {
+			stockNavArrow.style.rotate = '180deg'
+			stockNavArrow.style.marginTop = '-14px'
+		}
+		el.classList.remove('stock__nav-show')
+	})
+}
+
+stockLiItem.forEach(el =>
+	el.addEventListener('click', function (e) {
+		stockSelectedLi.textContent = e.target.textContent
+		switch (stockSelectedLi.textContent) {
+			case 'Najpopularniejsze':
+				return getStockData('AAPL,TSLA,MSFT')
+			case 'Forex':
+				return getStockData('AAT,ABC,ACA')
+			case 'Akcje':
+				return getStockData('AVK,AWI,AWF')
+			case 'Towary':
+				return getStockData('ZLDSF,ZMDC,ZNRG')
+			case 'Indeksy':
+				return getStockData('GOOGL,GE,KO')
+			case 'Kryptowaluty':
+				return getStockData('RIOT,COIN,ARGO')
+			default:
+				console.log('gówno')
+				return getStockData('AAPL,TSLA,MSFT')
+		}
+	})
+)
+
+const getStockData = (symbols) => {
+	const url = API_URL + symbols + API_KEY
+	console.log(symbols)
+	console.log(url)
+	return axios.get(url).then(res => {
+		const symbolData = res.data.data
+		stockPair.forEach((elem, index) => {
+			elem.textContent = symbolData[index].ticker
 		})
-		arrNumber = 0
-		stockFullName.forEach(elem => {
-			elem.textContent = symbolData[arrNumber].name
-			arrNumber++
+		stockFullName.forEach((elem, index) => {
+			elem.textContent = symbolData[index].name
 		})
-		arrNumber = 0
-		stockPrice.forEach(elem => {
-			elem.textContent = symbolData[arrNumber].price
-			arrNumber++
+		stockPrice.forEach((elem, index) => {
+			elem.textContent = symbolData[index].price
 		})
-		arrNumber = 0
-		percentChange.forEach(elem => {
-			const percent = symbolData[arrNumber].day_change / symbolData[arrNumber].day_low
+		percentChange.forEach((elem, index) => {
+			const percent = symbolData[index].day_change / symbolData[index].day_low
 			elem.textContent = (percent * 100).toFixed(2) + '%'
-			arrNumber++
 		})
-		arrNumber = 0
-		stockMin.forEach(elem => {
-			elem.textContent = symbolData[arrNumber].day_low
-			arrNumber++
+		stockMin.forEach((elem, index) => {
+			elem.textContent = symbolData[index].day_low
 		})
-		arrNumber = 0
-		stockMax.forEach(elem => {
-			elem.textContent = symbolData[arrNumber].day_high
-			arrNumber++
+		stockMax.forEach((elem, index) => {
+			elem.textContent = symbolData[index].day_high
 		})
-		arrNumber = 0
-		progressBar.forEach(elem => {
-			const percentChange = Math.floor(((symbolData[arrNumber].price - symbolData[arrNumber].day_low)/(symbolData[arrNumber].day_high - symbolData[arrNumber].day_low)*100))
+		progressBar.forEach((elem, index) => {
+			const percentChange = Math.floor(
+				((symbolData[index].price - symbolData[index].day_low) /
+					(symbolData[index].day_high - symbolData[index].day_low)) *
+					100
+			)
 			elem.style.width = percentChange + '%'
-			console.log(percentChange)
-			arrNumber++
 		})
-		arrNumber = 0
-		progressArrow.forEach(elem => {
-			const percentChange = Math.floor(((symbolData[arrNumber].price - symbolData[arrNumber].day_low)/(symbolData[arrNumber].day_high - symbolData[arrNumber].day_low)*100))
+		progressArrow.forEach((elem, index) => {
+			const percentChange = Math.floor(
+				((symbolData[index].price - symbolData[index].day_low) /
+					(symbolData[index].day_high - symbolData[index].day_low)) *
+					100
+			)
 			elem.style.left = percentChange + '%'
-			console.log(percentChange)
-			arrNumber++
 		})
 	})
 }
-// getData()
+
+const onClickOutside = (ele, cb) => {
+	document.addEventListener('click', event => {
+		if (!ele.contains(event.target)) cb()
+	})
+}
 
 navBtn.addEventListener('click', burgerFn)
 bannerBtn.addEventListener('click', bannerShowHide)
 paypalBtn.addEventListener('click', handlePaypal)
 paypalSmallBanner.addEventListener('click', handlePaypal)
+stockNav.addEventListener('click', handleMenu)
+onClickOutside(stockNav, hideMenu)
+onClickOutside(navBtn, hideBurger)
+getStockData('AAPL,TSLA,MSFT')
