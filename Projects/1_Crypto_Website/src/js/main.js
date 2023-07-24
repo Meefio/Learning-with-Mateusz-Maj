@@ -9,10 +9,13 @@ const paypalExpanded = document.querySelector('.banner-paypal__expanded')
 const paypalBtnIcon = document.querySelector('.banner-paypal__icon')
 const stockSelectedLi = document.querySelector('.stock__selected-li')
 const stockNav = document.querySelector('.stock__nav')
+const stockNavLiBox = document.querySelector('.stock__li-box')
 const stockLiItem = document.querySelectorAll('.stock__li-item')
 const stockNavArrow = document.querySelector('.stock__arrow')
 const API_URL = 'https://api.stockdata.org/v1/data/quote?symbols='
-const API_KEY = '&api_token=JGB3f6aL6tyng2f8KOGq2YK0NdtlzChkP2zkV1ve'
+// const API_KEY = '&api_token=JGB3f6aL6tyng2f8KOGq2YK0NdtlzChkP2zkV1ve'
+const API_KEY = '&api_token=JHN8EIfr7Emz3wLsQWoOynuNC1yvk1I3HDYqZNHR'
+
 
 const stockPair = document.querySelectorAll('.stock__pair')
 const stockFullName = document.querySelectorAll('.stock__full-name')
@@ -62,43 +65,44 @@ const handlePaypal = () => {
 	paypalBtnIcon.classList.toggle('paypal-btn-rotate')
 }
 const handleMenu = () => {
-	stockLiItem.forEach(el => {
-		el.classList.toggle('stock__nav-show')
-		if (el.classList.contains('stock__nav-show')) {
-			stockNavArrow.style.rotate = '180deg'
-			stockNavArrow.style.marginTop = '-14px'
-		} else {
-			stockNavArrow.style.rotate = '0deg'
-			stockNavArrow.style.marginTop = '-5px'
-		}
-	})
+	stockNavLiBox.classList.toggle('stock__nav-show')
+	if (stockNavLiBox.classList.contains('stock__nav-show')) {
+		stockNavArrow.style.rotate = '180deg'
+		stockNavArrow.style.marginTop = '-14px'
+	} else {
+		stockNavArrow.style.rotate = '0deg'
+		stockNavArrow.style.marginTop = '-5px'
+	}
 }
 
 const hideMenu = () => {
-	stockLiItem.forEach(el => {
-		if (el.classList.contains('stock__nav-show')) {
-			stockNavArrow.style.rotate = '180deg'
-			stockNavArrow.style.marginTop = '-14px'
-		}
-		el.classList.remove('stock__nav-show')
-	})
+	stockNavLiBox.classList.remove('stock__nav-show')
+	stockNavArrow.style.rotate = '0deg'
+	stockNavArrow.style.marginTop = '-5px'
 }
 
 stockLiItem.forEach(el =>
 	el.addEventListener('click', function (e) {
 		stockSelectedLi.textContent = e.target.textContent
+		clearClass()
 		switch (stockSelectedLi.textContent) {
 			case 'Najpopularniejsze':
+				e.target.classList.add('stock__active')
 				return getStockData('AAPL,TSLA,MSFT')
 			case 'Forex':
+				e.target.classList.add('stock__active')
 				return getStockData('AAT,ABC,ACA')
 			case 'Akcje':
+				el.classList.add('stock__active')
 				return getStockData('AVK,AWI,AWF')
 			case 'Towary':
+				el.classList.add('stock__active')
 				return getStockData('ZLDSF,ZMDC,ZNRG')
 			case 'Indeksy':
+				el.classList.add('stock__active')
 				return getStockData('GOOGL,GE,KO')
 			case 'Kryptowaluty':
+				el.classList.add('stock__active')
 				return getStockData('RIOT,COIN,ARGO')
 			default:
 				console.log('gówno')
@@ -107,7 +111,11 @@ stockLiItem.forEach(el =>
 	})
 )
 
-const getStockData = (symbols) => {
+const clearClass = () => {
+	stockLiItem.forEach(el => el.classList.remove('stock__active'))
+}
+
+const getStockData = symbols => {
 	const url = API_URL + symbols + API_KEY
 	console.log(symbols)
 	console.log(url)

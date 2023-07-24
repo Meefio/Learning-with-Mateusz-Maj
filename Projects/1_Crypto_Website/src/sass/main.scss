@@ -45,6 +45,12 @@ body {
 		color: c.$gold;
 	}
 }
+.section-heading {
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 2.8rem;
+	font-weight: 400;
+}
 
 .banner {
 	position: static;
@@ -410,6 +416,23 @@ body {
 		border-top: none;
 		cursor: pointer;
 	}
+	&__li-box {
+		display: none;
+		overflow: hidden;
+		position: absolute;
+		width: 100%;
+		box-shadow: 0 4px 10px c.$gray-darker;
+		animation: menu-show 0.3s forwards;
+	}
+
+	@keyframes menu-show {
+		0% {
+			height: 0;
+		}
+		100% {
+			height: 600%;
+		}
+	}
 	&__selected-li {
 		color: #ebf0f4;
 		padding: 15px;
@@ -419,7 +442,6 @@ body {
 		}
 	}
 	&__li-item {
-		display: none;
 		padding: 15px;
 		color: #222222;
 		background-color: #fff;
@@ -431,11 +453,7 @@ body {
 			background-color: #1960af;
 		}
 	}
-	&__li-box {
-		position: absolute;
-		width: 100%;
-		box-shadow: 0 4px 10px c.$gray-darker;
-	}
+
 	&__active {
 		background-color: #ebf0f4;
 	}
@@ -514,8 +532,95 @@ body {
 		font-size: 1.1rem;
 		color: #8799ae;
 	}
-	&__nav-show{
+	&__nav-show {
 		display: block;
+	}
+}
+.guide {
+	padding: 30px 0 10px;
+	background-color: #5b6a88;
+	color: c.$white;
+	&__box {
+		padding: 0 20px;
+	}
+	&__heading {
+		text-transform: uppercase;
+		text-align: center;
+		font-size: 1.9rem;
+	}
+	&__card {
+		display: flex;
+	}
+	&__description {
+		margin: 1.5rem 0 4rem;
+		font-size: 1.4rem;
+		text-align: center;
+	}
+	&__icon {
+		font-size: 6rem;
+		align-self: center;
+	}
+	&__card-title {
+		font-size: 2.2rem;
+		margin: 0 0 1rem 3rem;
+		font-weight: 400;
+	}
+	&__card-description {
+		font-size: 1.4rem;
+		margin: 0 0 3rem 3rem;
+	}
+	&__card-link {
+		color: #fede92;
+		text-decoration: underline;
+	}
+}
+.discover {
+	padding: 40px 20px;
+	&__text {
+		font-size: 1.6rem;
+		padding: 2rem 0;
+	}
+
+	&__text--bold{
+		font-weight: bold;
+	}
+	&__btn {
+		width: 100%;
+		margin-top: 20px;
+		background-color: #0c51a3;
+		font-size: 1.8rem;
+		padding: 0.8em 0;
+	}
+	&__video{
+		margin: 20px 0 ;
+		height: 315px;
+		width: 100%;
+	}
+	&__video-title{
+		margin-bottom: 10px;
+		font-size: 1.5rem;
+		color: c.$gray-darker;
+		text-transform: uppercase;
+	}
+	&__date{
+		display: inline-block;
+		padding: 0.5em 1em;
+		background-color: #8799ae;
+		color: c.$white;
+		border-radius: 3px;
+		font-weight: bold;
+	}
+}
+.footer-sitemap{
+	padding: 30px 20px;
+	background-color: #1d2937;
+	color: c.$white;
+	&__title{
+		font-size: 1.3rem;
+		text-transform: uppercase;
+		color: #abc0e3;
+		padding: 1em 0;
+		border-bottom: 1px solid #3e4c5e;
 	}
 }
 
@@ -565,7 +670,7 @@ body {
 	.hamburger {
 		display: none;
 	}
-	
+
 	.desktop-menu {
 		display: flex;
 	}
@@ -593,7 +698,7 @@ body {
 			width: 300px;
 		}
 	}
-	
+
 	.main-section {
 		position: relative;
 		flex-direction: row;
@@ -665,4 +770,30 @@ body {
 	.stock {
 		max-width: 700px;
 	}
+
+	.guide {
+		&__card-box {
+			display: flex;
+			justify-content: space-around;
+		}
+	}
+	.discover{
+		display: flex;
+		gap: 50px;
+
+		&__btn{
+			width: 300px;
+			align-self: center;
+		}
+		&__flex-left{
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			width: 50%;
+		}
+		&__flex-right{
+			width: 50%;
+		}
+	}
+
 }
